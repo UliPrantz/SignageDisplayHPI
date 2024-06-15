@@ -1,0 +1,12 @@
+[Unit]
+Description=Startup Signage Display
+After=graphical.target multi-user.target
+
+[Service]
+User=pi
+ExecStart=/home/pi/SignageDisplay/startup_script.sh
+Restart=always
+RestartSec=10 
+
+[Install]
+WantedBy=multi-user.target graphical.target
