@@ -103,6 +103,15 @@ We now need to reboot the system to apply the changes. Therefore select `Finish`
 
 ## Troubleshooting
 
+### Make sure the file paths are correct
+
+Some of the file paths in the `SignageDisplay.py` file are hardcoded and may also depend on the repository name. Make sure the paths are correct and the files are in the correct location.
+
+Things to check are:
+
+- The `SignageDisplay.service` file (beaware that you had to copy this!)
+- The `tmp_working_directory` path in the `SignageDisplay.py` file
+
 ### Reading the logs
 
 If you encounter any issues, please open an issue on this repository.
@@ -160,7 +169,7 @@ Copy the PDF file to a USB stick and make sure the USB stick is formatted with a
 ## 3. Rename the PDF file
 
 Rename the PDF file to one of the **allowed file names** in the `SignageDisplay.py` file, if not already done. </br>
-This is necessary since the script will only display PDF files with the allowed file names.
+This is necessary since the script will only display PDF files with the allowed file names **(file names are case sensitive!)**.
 
 ## 4. Insert the USB stick
 

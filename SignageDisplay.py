@@ -13,7 +13,7 @@ import logging
 ##################################################################
 TMP_MOUNT_PATH = "/media/root/SignageDisplayMountPoint"
 TMP_WORKING_DIR = "/root/SignageDisplayHPI/tmp_working_directory"
-ALLOWED_FILE_NAMES = ["E-School-TV.pdf"] # PDFs must have one of these file names to be displayed
+ALLOWED_FILE_NAMES = ["Example-File-Name.pdf"] # PDFs must have one of these file names to be displayed
 SLIDESHOW_DELAY_SECONDS = 10
 SLIDESHOW_BLENDING_SECONDS = 1
 SCALE_FACTOR = 6 # is used when transforming the PDF to images and should be sufficient for 4k
