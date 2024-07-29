@@ -23,7 +23,7 @@ sudo su
 
 Switch to root user default home directory:
 
-```bash 
+```bash
 cd 
 ```
 
@@ -69,7 +69,7 @@ Now we need to change the configuration. We can do this by going into the `Signa
 ALLOWED_FILE_NAMES = ["Example-File-Name.pdf"] 
 ```
 
-### 4. Autostart everything
+### 5. Autostart everything
 
 To make everything work automatically from the startup, you need to create a systemd service. We can do this by copying the `SignageDisplay.service` file to the systemd services directory and enabling it.
 
@@ -80,7 +80,7 @@ systemctl enable SignageDisplay.service
 systemctl start SignageDisplay.service
 ```
 
-### 5. Secure the setup
+### 6. Secure the setup
 
 Set a new password for the `pi` user by running the following command:
 
@@ -88,15 +88,18 @@ Set a new password for the `pi` user by running the following command:
 passwd pi
 ```
 
-### 6. Disable auto login and restart
+### 7. Disable auto login and restart
 
 To make sure the script works correctly, we need to disable the auto login feature of the Raspberry Pi and switch to console boot. This can be done by running the following command:
 
 ```bash
 raspi-config
 ```
+Here navigate to `System Options` -> `Boot / Auto Login` and now select `Console`. This disabled the Autologin and switched to console boot. 
 
-Here navigate to `System Options` -> `Boot / Auto Login` and now select `Console`. This disabled the Autologin and switched to console boot. We now need to reboot the system to apply the changes. Therefore select `Finish` and confirm the reboot with `Yes`.
+> For easier maintance you can also activate the SSH server here. Under `Interfacing Options` -> `SSH`.
+
+We now need to reboot the system to apply the changes. Therefore select `Finish` and confirm the reboot with `Yes`.
 
 ## Troubleshooting
 
@@ -141,9 +144,24 @@ groups pi
 
 # Usage Instructions
 
-Here are the steps to actually use the display as a monitor for your PDFs.
+Here are the steps to actually use the display as a monitor for your PDFs once it was properly setup.
 
-> 
+## 1. Create a PDF
 
+Create a PDF file that you want to display on the monitor. Make sure the PDF is named one of the allowed file names in the `SignageDisplay.py` file.
 
+> Important here is that the PDF pages are in the **16:9** format. Otherwise the PDF will be displayed with black bars on the side. </br>
+> Creating a slideshow in **PowerPoint or Keynote** and saving/exporting it as a PDF is a good way to create a PDF with the correct aspect ratio.
 
+## 2. Copy the PDF to a USB stick
+
+Copy the PDF file to a USB stick and make sure the USB stick is formatted with a common file system such as `FAT32` (tested) or `ExFAT` (not tested) file system.
+
+## 3. Rename the PDF file
+
+Rename the PDF file to one of the **allowed file names** in the `SignageDisplay.py` file, if not already done. </br>
+This is necessary since the script will only display PDF files with the allowed file names.
+
+## 4. Insert the USB stick
+
+Insert the USB stick into the Raspberry Pi. The PDF should be displayed on the monitor after a few seconds. Once the PDF is displayed, you can remove the USB stick. The slideshow will also be displayed after a reboot. If not (sometimes the PDF file gets corrupted when not properly shutdown) just reinsert the USB stick.
