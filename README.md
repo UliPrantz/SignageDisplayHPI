@@ -60,6 +60,15 @@ pip3 install -r requirements.txt --break-system-packages
 > Short notice here: The `--break-system-packages` flag is used to install the dependencies globally. This is necessary because the script is run as a systemd service and the service does not have access to the user's python environment. </br> 
 > **Normally we wouldn't want this but since this is a single purpose system we will be fine!**
 
+### 4. Change the configuration (especially the allowed PDF names)
+
+Now we need to change the configuration. We can do this by going into the `SignageDisplay.py` file and change the appropriate variables at the top of the file
+
+**The allowed files names are the names of the PDF files that are allowed to be displayed.**
+```python
+ALLOWED_FILE_NAMES = ["Example-File-Name.pdf"] 
+```
+
 ### 4. Autostart everything
 
 To make everything work automatically from the startup, you need to create a systemd service. We can do this by copying the `SignageDisplay.service` file to the systemd services directory and enabling it.
@@ -78,6 +87,16 @@ Set a new password for the `pi` user by running the following command:
 ```bash
 passwd pi
 ```
+
+### 6. Disable auto login and restart
+
+To make sure the script works correctly, we need to disable the auto login feature of the Raspberry Pi and switch to console boot. This can be done by running the following command:
+
+```bash
+raspi-config
+```
+
+Here navigate to `System Options` -> `Boot / Auto Login` and now select `Console`. This disabled the Autologin and switched to console boot. We now need to reboot the system to apply the changes. Therefore select `Finish` and confirm the reboot with `Yes`.
 
 ## Troubleshooting
 

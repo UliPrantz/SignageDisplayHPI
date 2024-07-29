@@ -12,7 +12,7 @@ import logging
 #
 ##################################################################
 TMP_MOUNT_PATH = "/media/root/SignageDisplayMountPoint"
-TMP_WORKING_DIR = "/root/SignageDisplay/tmp_working_directory"
+TMP_WORKING_DIR = "/root/SignageDisplayHPI/tmp_working_directory"
 ALLOWED_FILE_NAMES = ["E-School-TV.pdf"] # PDFs must have one of these file names to be displayed
 SLIDESHOW_DELAY_SECONDS = 10
 SLIDESHOW_BLENDING_SECONDS = 1
@@ -55,6 +55,7 @@ def convert_pdf_to_images(pdf_path):
 
 def start_pdf_slideshow():    
     files = os.listdir(TMP_WORKING_DIR)
+    files.sort() # inplace sort to guarantee slideshow order
     files = [f"{TMP_WORKING_DIR}/{file_name}" for file_name in files]
     subprocess.Popen(
         ["fbi", "-T", "1", "-a", "--noverbose", "--blend", f"{SLIDESHOW_BLENDING_SECONDS * 1000}", "-t", f"{SLIDESHOW_DELAY_SECONDS}", *files],
