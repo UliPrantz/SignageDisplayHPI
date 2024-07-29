@@ -13,15 +13,43 @@ Open a terminal and run the following commands to update your system and install
 
 > We will run this script as root since we are doing a lot of system level operations (e. g. writing directly to the frame buffer or mounting USB drives). This could also be achieved by running the script as a non-root user but this would require additional setup steps including adding the user to the `video` group and adding system capabilities to auto mount USB drives while being in headless mode.
 
+### 0. Switch to root user
+
+The whole installation as well as the execution of the script will be done as the root user. To switch to the root user, run the following command:
+
+```bash
+sudo su
+```
+
+Switch to root user default home directory:
+
+```bash 
+cd 
+```
+
 ### 1. Install System Packages
 
 ```bash
 apt update -y
 apt full-upgrade -y
-apt install -y python3 feh 
+apt install -y python3 fbi git 
 ```
 
-### 2. Install python dependencies
+### 2. Clone the repository
+
+Now we need to clone the repository to the Raspberry Pi. We can do this by running the following command:
+
+```bash
+git clone https://github.com/UliPrantz/SignageDisplayHPI.git
+```
+
+After cloning the repository, we need to change into the directory:
+
+```bash
+cd SignageDisplayHPI
+```
+
+### 3. Install python dependencies
 
 No we simply need to install the python dependencies globally. This can be done by running the following command:
 
@@ -32,7 +60,7 @@ pip3 install -r requirements.txt --break-system-packages
 > Short notice here: The `--break-system-packages` flag is used to install the dependencies globally. This is necessary because the script is run as a systemd service and the service does not have access to the user's python environment. </br> 
 > **Normally we wouldn't want this but since this is a single purpose system we will be fine!**
 
-### 3. Autostart everything
+### 4. Autostart everything
 
 To make everything work automatically from the startup, you need to create a systemd service. We can do this by copying the `SignageDisplay.service` file to the systemd services directory and enabling it.
 
@@ -43,7 +71,7 @@ systemctl enable SignageDisplay.service
 systemctl start SignageDisplay.service
 ```
 
-### 4. Secure the setup
+### 5. Secure the setup
 
 Set a new password for the `pi` user by running the following command:
 

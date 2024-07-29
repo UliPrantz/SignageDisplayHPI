@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 User=root
-ExecStart=/root/SignageDisplay/startup_script.sh
+ExecStart=/root/SignageDisplayHPI/startup_script.sh
 Restart=always
 RestartSec=10 
 
